@@ -1,8 +1,6 @@
 "use client"
 import { createContext, useContext, useState } from 'react';
 
-type ErrorType = { message: string };
-
 type TGlobalState = {
   count: number
   increaseCount: () => void

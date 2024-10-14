@@ -1,3 +1,4 @@
+import FetchComment from "@/app/components/FetchComment";
 import FetchPostData from "@/app/components/FetchPostData";
 import Product from "@/app/components/Product";
 import { fetchData } from "@/app/utils";
@@ -33,7 +34,10 @@ const Page = () => {
   return (
     <div>
       <FetchPostData />
-      <Product />
+      <Product>
+        <FetchComment />
+      </Product>
+      <FetchComment />
     </div>
   );
 };

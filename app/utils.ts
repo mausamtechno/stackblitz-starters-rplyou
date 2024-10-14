@@ -15,5 +15,16 @@ const fetchData = async ({ id }:{ id: number }): Promise<IPost> => {
     throw error;
   }
 };
+const fetchComment = async ({ id }:{ id: number }): Promise<IPost> => {
+  try {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/comments/${id}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
 
-export { fetchData };
+export { fetchData, fetchComment };
