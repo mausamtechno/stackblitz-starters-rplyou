@@ -1,9 +1,9 @@
 import { imageURL, TServiceCard } from "../ServiceCard";
 import {
+  ActionButton,
   PostHotelBookingInfo,
   PostTourBookingInfo,
   PostVisaBookingInfo,
-  ServiceCardBottomWrapper,
 } from "./BottomWrapper";
 import {
   HotelDescription,
@@ -14,7 +14,7 @@ import {
 import { ServiceStatus } from "./ServiceStatusContainer";
 
 type TUpdatedServiceCard = {
-  step: "prebooking" | "postbooking";
+  step: "prebooking" | "postbooking" | "cart";
   serviceType: TServiceCard["type"];
 };
 
@@ -24,7 +24,7 @@ const data: TServiceCard = {
   title: "This is Tour title",
   location: "Dubai",
   eventDate: "22Oct 2025",
-  status: "Pending",
+  status: "Confirmed",
   numberOfDaysToFulfill: "4 days",
 };
 
@@ -69,10 +69,8 @@ const UpdatedServiceCard = ({ step, serviceType }: TUpdatedServiceCard) => {
 
   const renderActionForStatus = ({
     step,
-    status,
   }: {
     step: TUpdatedServiceCard["step"];
-    status: TServiceCard["status"];
   }) => {
     switch (step) {
       case "prebooking":
@@ -110,26 +108,52 @@ const UpdatedServiceCard = ({ step, serviceType }: TUpdatedServiceCard) => {
         return null;
     }
   };
+
+  const renderActionForActionButton = ({
+    step,
+  }: {
+    step: TUpdatedServiceCard["step"];
+  }) => {
+    switch (step) {
+      case "prebooking":
+        return (
+          <ActionButton
+            primaryBtnText="Remove"
+            secondaryBtnText="Book Now"
+            handlePrimaryBtnClick={handlePrimaryBtnClick}
+            handleSecondaryBtnClick={handleSecondaryBtnClick}
+          />
+        );
+      case "postbooking":
+        return (
+          <ActionButton
+            primaryBtnText="Get Help"
+            secondaryBtnText="Vouchers"
+            handlePrimaryBtnClick={handlePrimaryBtnClick}
+            handleSecondaryBtnClick={handleSecondaryBtnClick}
+          />
+        );
+
+      default:
+        break;
+    }
+  };
   const handlePrimaryBtnClick = () => {};
   const handleSecondaryBtnClick = () => {};
 
   return (
     <>
-      <div>
+      <div className="p-4 shadow-md rounded-md">
         <ImageAndDescription imageURL={imageURL} title={title} type={type}>
-          <div className="flex justify-between">
+          <div className="flex justify-between gap-x-10">
             {renderActionForCardDescription({ serviceType })}
-            {renderActionForStatus({ step, status })}
+            {renderActionForStatus({ step })}
           </div>
         </ImageAndDescription>
-        <ServiceCardBottomWrapper
-          primaryBtnText="primary"
-          secondaryBtnText="secondary"
-          handlePrimaryBtnClick={handlePrimaryBtnClick}
-          handleSecondaryBtnClick={handleSecondaryBtnClick}
-        >
+        <div className="flex justify-between">
           {renderActionForPostBookingInfo({ serviceType })}
-        </ServiceCardBottomWrapper>
+          {renderActionForActionButton({ step })}
+        </div>
       </div>
     </>
   );

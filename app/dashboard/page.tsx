@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import PostCard from "../components/PostCard";
 import ServiceCard, { imageURL, TServiceCard } from "../components/ServiceCard";
 import { ServiceCardWithoutComposition } from "../components/PostCardWithoutComposition";
+import UpdatedServiceCard from "../components/activity/UpdatedServiceCard";
 
 const data = {
   id: 1,
@@ -36,7 +37,7 @@ const Dashboard = () => {
   };
   console.log("This is Dashboard Page");
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center space-y-6">
       {count}
       <button onClick={increaseCount}>Increase</button>
       <button onClick={decreaseCount}>Decrease</button>
@@ -53,13 +54,14 @@ const Dashboard = () => {
         <ServiceCard.ActionButton handleClick={handleClick} />
         <ServiceCard.ServiceStatus status="Pending" />
       </ServiceCard> */}
-      <ServiceCardWithoutComposition service={value} />
-      <PostCard post={data}>
+      {/* <ServiceCardWithoutComposition service={value} /> */}
+      {/* <PostCard post={data}>
         <PostCard.Name />
         <PostCard.Content />
         <PostCard.Title />
         <PostCard.Button />
-      </PostCard>
+      </PostCard> */}
+      <UpdatedServiceCard step="postbooking" serviceType="HOTEL" />
     </div>
   );
 };

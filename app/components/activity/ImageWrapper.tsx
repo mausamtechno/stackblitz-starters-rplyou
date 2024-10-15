@@ -64,8 +64,8 @@ const ImageAndDescription: FC<TImageAndDescription> = ({
   children,
 }) => {
   return (
-    <div>
-      <Image src={imageURL} alt="image" />
+    <div className="flex">
+      <Image src={imageURL} alt="image" height={100} width={100} className="h-24 w-auto rounded" />
       <div>
         <p className="text-orange text-xs leading-4">{type}</p>
         <p className="text-steelGrey800 font-semibold leading-5">{title}</p>

@@ -4,22 +4,22 @@ import { TServiceCard } from "../ServiceCard";
 const ServiceStatus = ({ status }: { status: TServiceCard["status"] }) => {
   const config = {
     Pending: {
-      textColor: "#FF8229",
-      bgColor: "#FFF6F0",
+      textColor: "text-[#FF8229]",
+      bgColor: "bg-[#FFF6F0]",
     },
     Confirmed: {
-      textColor: "#1F9E45",
-      bgColor: "#F0FFF6",
+      textColor: "text-[#1F9E45]",
+      bgColor: "bg-[#F0FFF6]",
     },
     Rejected: {
-      textColor: "#DC232F",
-      bgColor: "#FFF1F0",
+      textColor: "text-[#DC232F]",
+      bgColor: "bg-[#FFF1F0]",
     },
   };
 
   return (
     <p
-      className={`py-1 px-2 text-center text-xs rounded text-${config[status].textColor} bg-${config[status].bgColor}`}
+      className={`text-center text-xs rounded ${config[status].textColor} ${config[status].bgColor}`}
     >
       {status}
     </p>

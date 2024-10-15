@@ -32,10 +32,10 @@ const ActionButton = ({
 }: TActionButton) => {
   return (
     <div className="flex gap-x-1">
-      <button className="block py-1 px-2" onClick={handleSecondaryBtnClick}>
+      <button className="block py-1 px-2 border p-3" onClick={handleSecondaryBtnClick}>
         {secondaryBtnText}
       </button>
-      <button className="block py-1 px-2" onClick={handlePrimaryBtnClick}>
+      <button className="block py-1 px-2 bg-orange text-white border rounded p-3" onClick={handlePrimaryBtnClick}>
         {primaryBtnText}
       </button>
     </div>
@@ -88,26 +88,9 @@ const PostTourBookingInfo = ({
       <p>{`${adultCount} Adults ${childrenCount} Children`}</p>
     </div>
   );
-};
-
-type TServiceCardBottomWrapper = {
-  children: ReactNode;
-} & TActionButton;
-
-const ServiceCardBottomWrapper = ({
-  children,
-  ...remainingProps
-}: TServiceCardBottomWrapper) => {
-  return (
-    <div>
-      {children}
-      <ActionButton {...remainingProps} />
-    </div>
-  );
-};
+};;
 
 export {
-  ServiceCardBottomWrapper,
   ActionButton,
   PriceInfo,
   PostHotelBookingInfo,
