@@ -33,7 +33,9 @@ export async function generateMetadata(
 const Page = () => {
   return (
     <div>
-      <FetchPostData />
+      <Product>
+        <FetchPostData />
+      </Product>
       <Product>
         <FetchComment />
       </Product>

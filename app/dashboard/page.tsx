@@ -2,11 +2,34 @@
 import { useGlobalContext } from "@/app/context/GlobalStateProvider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import PostCard from "../components/PostCard";
+import ServiceCard, { imageURL, TServiceCard } from "../components/ServiceCard";
+import { ServiceCardWithoutComposition } from "../components/PostCardWithoutComposition";
+
+const data = {
+  id: 1,
+  title: "This is title",
+  content: "This is content",
+  user: {
+    id: 2,
+    name: "This is user name",
+  },
+};
+
+const value: TServiceCard = {
+  type: "HOTEL",
+  title: "This is service title",
+  status: "Pending",
+  eventDate: "23oct 2028",
+  location: "Sarjah",
+  numberOfDaysToFulfill: "3 - 4 working day",
+  imageURL: "/",
+};
 
 const Dashboard = () => {
   const { count, increaseCount, decreaseCount } = useGlobalContext();
   const { push, prefetch } = useRouter();
-
+  const handleClick = () => {};
   const submitHandler = () => {
     prefetch("/dashboard/product");
     setTimeout(() => push("/dashboard/product"), 3000);
@@ -22,6 +45,21 @@ const Dashboard = () => {
 
       <button onClick={submitHandler}>Product on btn click (prefetch)</button>
       <Link href="/">Go to Homepage</Link>
+
+      {/* <ServiceCard value={value}>
+        <ServiceCard.ImageContainer />
+        <ServiceCard.EventLocation />
+        <ServiceCard.EventDate />
+        <ServiceCard.ActionButton handleClick={handleClick} />
+        <ServiceCard.ServiceStatus status="Pending" />
+      </ServiceCard> */}
+      <ServiceCardWithoutComposition service={value} />
+      <PostCard post={data}>
+        <PostCard.Name />
+        <PostCard.Content />
+        <PostCard.Title />
+        <PostCard.Button />
+      </PostCard>
     </div>
   );
 };
