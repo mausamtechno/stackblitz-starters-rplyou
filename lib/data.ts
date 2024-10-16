@@ -1,6 +1,6 @@
 import { TComponentB } from "@/app/components/activity/UpdatedServiceCard";
 
-const imageURL = "/square.jpg";
+export const imageURL = "/square.jpg";
 
 export const dataArray: TComponentB[] = [
     {
