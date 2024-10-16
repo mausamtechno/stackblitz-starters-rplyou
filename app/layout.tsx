@@ -1,9 +1,14 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { GlobalStateProvider } from './context/GlobalStateProvider';
 
-const inter = Inter({ subsets: ['latin'] });
+import { Lexend } from 'next/font/google'
+ 
+const roboto = Lexend({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GlobalStateProvider>
-        <body className={inter.className}>
+        <body className={roboto.className}>
           This is Root Layouyt
           {children}
           </body>
