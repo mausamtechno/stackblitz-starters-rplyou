@@ -11,11 +11,11 @@ export default function Error({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error(error)
+    console.error(error.digest)
   }, [error])
  
   return (
-    <div>
+    <div className='border p-8'>
       <h2>Something went wrong!</h2>
       <Button
         onClick={

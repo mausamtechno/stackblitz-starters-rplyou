@@ -56,7 +56,7 @@ const Parse = () => {
   const DogSchema = Animal.shape.dog
   type TDog = z.infer<typeof DogSchema>
   const keys = Animal.keyof()
-  console.log(keys, "keys of Animal")
+  // console.log(keys, "keys of Animal")
   return <div>Zod</div>;
 };
 
