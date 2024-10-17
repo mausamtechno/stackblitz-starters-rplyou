@@ -9,32 +9,34 @@ const meta = {
   title: "Example/Components/Button",
   component: Button,
   parameters: {
-    layout: "centered", // Center the component in the Storybook canvas
+    layout: "centered",
+    backgrounds: {},
   },
-  decorators: [(Story) => (
-    <StoryBookParentWrapper>
-      <Story />
-    </StoryBookParentWrapper>
-  ),],
-  tags: ["autodocs"], // Automatic docs generation
-  args: { onClick: action("clicked") }, // Log clicks to the Storybook Actions panel
+  decorators: [
+    (Story) => (
+      <StoryBookParentWrapper>
+        <Story />
+      </StoryBookParentWrapper>
+    ),
+  ],
+  tags: ["autodocs"],
+  args: { onClick: action("clicked") },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 
-type Story = StoryObj<typeof Button>; // Correct Story type
+type Story = StoryObj<typeof Button>;
 
-// Primary story
 export const Primary: Story = {
+  parameters: {},
   args: {
-    className: "bg-orange", // Add any required className
-    variant: "default", // Set your variant prop
+    className: "bg-orange",
+    variant: "default",
     size: "sm",
     text: "Primary",
   },
 };
 
-// Secondary story
 export const Secondary: Story = {
   args: {
     className: "bg-lightGreen800 text-white",
@@ -44,7 +46,6 @@ export const Secondary: Story = {
   },
 };
 
-// Large story
 export const Large: Story = {
   args: {
     className: "text-steelGrey600",
@@ -54,7 +55,6 @@ export const Large: Story = {
   },
 };
 
-// Small story
 export const Small: Story = {
   parameters: {},
   args: {

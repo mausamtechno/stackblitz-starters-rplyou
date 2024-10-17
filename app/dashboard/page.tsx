@@ -2,20 +2,8 @@
 import { useGlobalContext } from "@/app/context/GlobalStateProvider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import PostCard from "../components/PostCard";
 import ServiceCard, { imageURL, TServiceCard } from "../components/ServiceCard";
-import { ServiceCardWithoutComposition } from "../components/PostCardWithoutComposition";
-import UpdatedServiceCard from "../components/activity/UpdatedServiceCard";
 
-const data = {
-  id: 1,
-  title: "This is title",
-  content: "This is content",
-  user: {
-    id: 2,
-    name: "This is user name",
-  },
-};
 
 const value: TServiceCard = {
   type: "HOTEL",
@@ -61,7 +49,6 @@ const Dashboard = () => {
         <PostCard.Title />
         <PostCard.Button />
       </PostCard> */}
-      <UpdatedServiceCard step="postbooking" serviceType="HOTEL" />
     </div>
   );
 };
