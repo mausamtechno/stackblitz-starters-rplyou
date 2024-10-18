@@ -1,19 +1,8 @@
+import { useGlobalContext } from "@/app/context/GlobalStateProvider";
+import Task from "./Task";
 
-import Task, { TaskProps } from "./Task";
-import { FC, MouseEventHandler } from "react";
-
-type TaskListProps = {
-  tasks: TaskProps["task"][];
-  loading: boolean,
-  onArchiveTask: MouseEventHandler<HTMLButtonElement>;
-  onPinTask: MouseEventHandler<HTMLButtonElement>;
-};
-
-const TaskList: FC<TaskListProps> = ({ loading, tasks, onPinTask, onArchiveTask }) => {
-  const events = {
-    onPinTask,
-    onArchiveTask,
-  };
+const TaskList = () => {
+  const { loading, onPinTask, onArchiveTask, tasks } = useGlobalContext();
   const LoadingRow = (
     <div className="loading-item">
       <span className="glow-checkbox" />
@@ -53,10 +42,15 @@ const TaskList: FC<TaskListProps> = ({ loading, tasks, onPinTask, onArchiveTask 
   return (
     <div className="list-items">
       {tasksInOrder.map((task) => (
-        <Task key={task.id} task={task} {...events} />
+        <Task
+          key={task.id}
+          task={task}
+          onArchiveTask={() => onArchiveTask(task.id)}
+          onPinTask={() => onPinTask(task.id)}
+        />
       ))}
     </div>
   );
-}
+};
 
-export default TaskList
+export default TaskList;

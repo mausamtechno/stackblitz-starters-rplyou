@@ -1,51 +1,78 @@
-import { Meta } from "@storybook/react";
-import { Default as TaskDefault } from "./Task.stories";
+import { Meta, StoryObj } from "@storybook/react";
 import TaskList from "./TaskList";
+import { TaskProps } from "@/stories/Task";
+import { createContext } from "react";
+import { GlobalStateProvider } from "@/app/context/GlobalStateProvider";
 
 const meta = {
   component: TaskList,
   title: "Example/Components/TaskList",
-  decorators: [(story) => <div style={{ margin: "3rem" }}>{story()}</div>],
   tags: ["autodocs"],
-  args: {
-    
-  },
 } satisfies Meta<typeof TaskList>;
 
-export default meta
+export default meta;
 
-export const Default = {
-  args: {
-    tasks: [
-      { ...TaskDefault.args.task, id: "1", title: "Task 1" },
-      { ...TaskDefault.args.task, id: "2", title: "Task 2" },
-      { ...TaskDefault.args.task, id: "3", title: "Task 3" },
-      { ...TaskDefault.args.task, id: "4", title: "Task 4" },
-      { ...TaskDefault.args.task, id: "5", title: "Task 5" },
-      { ...TaskDefault.args.task, id: "6", title: "Task 6" },
-    ],
-  },
+const defaultTasks = [
+  { id: "1", title: "Something", state: "TASK_INBOX" as const },
+  { id: "2", title: "Something more", state: "TASK_INBOX" as const },
+  { id: "3", title: "Something else", state: "TASK_INBOX" as const },
+  { id: "4", title: "Something again", state: "TASK_INBOX" as const },
+];
+
+export type TaskActionHandler = (id: TaskProps["task"]["id"]) => void;
+export type TaskListProps = {
+  tasks: TaskProps["task"][];
+  loading: boolean;
+  onArchiveTask: TaskActionHandler;
+  onPinTask: TaskActionHandler;
 };
 
-export const WithPinnedTasks = {
-  args: {
-    tasks: [
-      ...Default.args.tasks.slice(0, 5),
-      { id: "6", title: "Task 6 (pinned)", state: "TASK_PINNED" },
-    ],
-  },
+const GlobalContext = createContext<TaskListProps>(null!);
+
+type Story = StoryObj<typeof TaskList>;
+
+export const Default: Story = {
+  decorators: [
+    (story) => (
+      <GlobalStateProvider taskList={defaultTasks}>
+        {story()}
+      </GlobalStateProvider>
+    ),
+  ],
 };
 
-export const Loading = {
-  args: {
-    tasks: [],
-    loading: true,
-  },
+export const WithPinnedTasks: Story = {
+  decorators: [
+    (story) => (
+      <GlobalStateProvider
+        taskList={[
+          ...defaultTasks.map((task, index) =>
+            index === 3 ? { ...task, state: "TASK_PINNED" as const } : task
+          ),
+        ]}
+      >
+        {story()}
+      </GlobalStateProvider>
+    ),
+  ],
 };
 
-export const Empty = {
-  args: {
-    ...Loading.args,
-    loading: false,
-  },
+export const Loading: Story = {
+  decorators: [
+    (story) => (
+      <GlobalStateProvider taskList={[]} loading={true}>
+        {story()}
+      </GlobalStateProvider>
+    ),
+  ],
+};
+
+export const Empty: Story = {
+  decorators: [
+    (story) => (
+      <GlobalStateProvider taskList={[]}>
+        {story()}
+      </GlobalStateProvider>
+    ),
+  ],
 };
