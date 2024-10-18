@@ -8,11 +8,12 @@ const meta = {
   component: TaskList,
   title: "Example/Components/TaskList",
   tags: ["autodocs"],
+  excludeStories: /.*Data$/,
 } satisfies Meta<typeof TaskList>;
 
 export default meta;
 
-const defaultTasks = [
+export const defaultTasksData = [
   { id: "1", title: "Something", state: "TASK_INBOX" as const },
   { id: "2", title: "Something more", state: "TASK_INBOX" as const },
   { id: "3", title: "Something else", state: "TASK_INBOX" as const },
@@ -27,14 +28,12 @@ export type TaskListProps = {
   onPinTask: TaskActionHandler;
 };
 
-const GlobalContext = createContext<TaskListProps>(null!);
-
 type Story = StoryObj<typeof TaskList>;
 
 export const Default: Story = {
   decorators: [
     (story) => (
-      <GlobalStateProvider taskList={defaultTasks}>
+      <GlobalStateProvider>
         {story()}
       </GlobalStateProvider>
     ),
@@ -45,11 +44,6 @@ export const WithPinnedTasks: Story = {
   decorators: [
     (story) => (
       <GlobalStateProvider
-        taskList={[
-          ...defaultTasks.map((task, index) =>
-            index === 3 ? { ...task, state: "TASK_PINNED" as const } : task
-          ),
-        ]}
       >
         {story()}
       </GlobalStateProvider>
@@ -60,7 +54,7 @@ export const WithPinnedTasks: Story = {
 export const Loading: Story = {
   decorators: [
     (story) => (
-      <GlobalStateProvider taskList={[]} loading={true}>
+      <GlobalStateProvider>
         {story()}
       </GlobalStateProvider>
     ),
@@ -70,7 +64,7 @@ export const Loading: Story = {
 export const Empty: Story = {
   decorators: [
     (story) => (
-      <GlobalStateProvider taskList={[]}>
+      <GlobalStateProvider >
         {story()}
       </GlobalStateProvider>
     ),

@@ -1,6 +1,7 @@
 import { TaskActionHandler } from "@/app/context/GlobalStateProvider";
 import { FC } from "react";
 
+export type TaskState = "TASK_PINNED" | "TASK_INBOX" | "TASK_ARCHIVED"
 export type TaskProps = {
   task: {
     id: number | string;
