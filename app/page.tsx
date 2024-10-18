@@ -10,6 +10,9 @@ export default function Home() {
       <Link href="/dashboard" prefetch>
         Go to Dashboard
       </Link>
+      <Link href="/fetching" prefetch>
+        Go to Fetching
+      </Link>
       <Parse />
       <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 p-6">
         {dataArray.map((data, index) => {

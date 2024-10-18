@@ -32,14 +32,14 @@ export const Primary: Story = {
   args: {
     className: "bg-orange",
     variant: "default",
-    size: "sm",
+    size: "lg",
     text: "Primary",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    className: "bg-lightGreen800 text-white",
+    className: "text-white",
     variant: "default",
     size: "default",
     text: "Secondary",
