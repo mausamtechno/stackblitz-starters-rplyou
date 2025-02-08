@@ -1,4 +1,5 @@
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 import type { Metadata } from "next";
 
 import { Lexend } from "next/font/google";
@@ -19,10 +20,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <html lang="en">
-    <body>
-      
-    {children}
-    </body>
-  </html>;
+  return (
+    <html lang="en">
+      <body>
+        <SessionProvider>{children}</SessionProvider>
+      </body>
+    </html>
+  );
 }

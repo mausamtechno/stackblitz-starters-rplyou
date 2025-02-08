@@ -5,5 +5,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/login",
   },
+  callbacks: {
+    async session({ session, token }) {
+      console.log("✅ Session Created:", session);
+      console.log("🔑 Token:", token);
+      return session;
+    },
+  },
   debug: true,
 });
