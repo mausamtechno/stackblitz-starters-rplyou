@@ -1,13 +1,25 @@
-'use server'
+"use server";
 import { signIn } from "@/customAuth";
+import { AuthError } from "next-auth";
 
 export const methodSignIn = async (formData: FormData) => {
-    try {
-        const password = formData.get('password')?.valueOf()
-        const email = formData.get('email')?.valueOf()
-        console.log(`437419918236197108 `, password, email);
-        await signIn("credentials", {email, password, redirect: false });
-    } catch (error) {
-        console.log(`404287197235542525 `, error);
+  try {
+    const password = formData.get("password")?.valueOf();
+    const email = formData.get("email")?.valueOf();
+    await signIn("credentials", { email, password, redirectTo: "/" });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return {
+            message: "Invalid credentials",
+          };
+        default:
+          return {
+            message: "Something went wrong.",
+          };
+      }
     }
-}
+    throw error;
+  }
+};
